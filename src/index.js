@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import Item from '@mui/material/ListItem';
+import { Box, Container } from '@mui/system';
+import Grid from '@mui/material/Grid';
+import './index.css';
 
 
 function AddButton(props){
   return (
-    <Button 
+    <Button
       variant='contained'
       onClick={props.onClick}
     >
@@ -28,23 +32,36 @@ class Task extends React.Component {
 
 class TaskList extends React.Component {
 
-  renderAddButton(i) {
-    return( 
-      <AddButton 
-        onClick={() => console.log('this was hit')} 
-      />
+  renderAddTaskRow(i) {
+    return(
+      <div className='row'>
+          <TextField id="outlined-basic" label="New Task" variant="outlined" 
+          />
+          <AddButton 
+            onClick={() => console.log('this was hit')} 
+          />
+      </div>
     );
   }
   render() {
     return (
-    <div>
-      <div>
-        <TextField id="outlined-basic" label="New Task" variant="outlined" />
-      </div>
-      <div>
-        {this.renderAddButton()}
-      </div>
-    </div>
+      <Container
+        alignItems="center"
+      >
+        <Stack spacing={3}
+            sx={{
+            backgroundColor: 'white',
+            color: 'black',
+          }} 
+        >
+          <Item> 
+            Some task here
+          </Item>
+          <Item>
+            {this.renderAddTaskRow()}
+          </Item>
+        </Stack>
+      </Container>
     );
   }
 }
