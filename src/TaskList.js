@@ -28,11 +28,11 @@ class TaskList extends React.Component {
             Some  other task here
           </Item>
           <Item>
-              <TextField id="outlined-basic" label="New Task" variant="outlined" 
-              />
-              <AddButton 
-                onClick={() => console.log('this was hit')} 
-              />
+            <TextField id="outlined-basic" label="New Task" variant="outlined" 
+            />
+            <AddButton 
+            onClick={() => console.log('this was hit')} 
+            />
           </Item>
         </Stack>
     );

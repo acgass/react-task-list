@@ -18,7 +18,7 @@ root.render(
     >
       <Grid item>
           <h3>
-            This is a header
+            Anna's Task List
           </h3>
       </Grid>
       <Grid item>
