@@ -4,13 +4,10 @@ import reportWebVitals from './reportWebVitals';
 import TaskList from './TaskList'
 import './index.css';
 import Grid from '@mui/material/Grid';
-import Divider from '@mui/material/Divider';
 
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
+function Notepad(){  
+  return(
     <Grid container  
       direction="column"
       justifyContent="center"
@@ -25,6 +22,14 @@ root.render(
         <TaskList />
       </Grid>
     </Grid>
+  );
+}
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <Notepad/>
   </React.StrictMode>
 );
 

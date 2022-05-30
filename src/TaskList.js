@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import Item from '@mui/material/ListItem';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: '#ffff',
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
 
 function AddButton(props){
   return (
@@ -15,28 +24,49 @@ function AddButton(props){
   );
 }
 
-class TaskList extends React.Component {
-  render() {
-    return (
-        <Stack
-            spacing={2}
-        >
-          <Item> 
-            Some task here
-          </Item>
-          <Item> 
-            Some  other task here
-          </Item>
-          <Item>
-            <TextField id="outlined-basic" label="New Task" variant="outlined" 
-            />
-            <AddButton 
-            onClick={() => console.log('this was hit')} 
-            />
-          </Item>
-        </Stack>
-    );
-  }
+function TaskList (){
+  const [tasklist, setTaskList] = useState([]);
+  const [value, setValue] = useState("");
+
+  const addChild = ((taskName) => {
+    console.log('we are trying to add a new task');
+    const  copy = tasklist.slice();
+    const  newindex = copy.length;
+    copy[newindex] = {
+      name: taskName,
+      id: newindex
+    }
+    setTaskList(copy)
+    setValue('')
+  });
+
+  const onChange=((e) => {
+    setValue(e.target.value);
+  });
+
+  return (
+      <Stack
+          spacing={2}
+      >
+        {
+         tasklist.map((task) => (
+              <Item id={task.id}>{task.name}</Item>
+          ))
+        }
+        <Item>
+          <TextField 
+            id="new-task" 
+            label="New Task" 
+            variant="outlined"
+            value={value}
+            onChange={onChange}
+          />
+          <AddButton 
+          onClick={() => addChild(value)} 
+          />
+        </Item>
+      </Stack>
+  );
 }
 
 export default TaskList;
