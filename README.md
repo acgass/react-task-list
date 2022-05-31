@@ -14,6 +14,6 @@ This project is really just a way for me to learn react. I decided to make a tas
 - Add a new Task List
 - Be able to Name a task list
 - Save a Task List
-- adding tests so i can learn Jest (also its just good practice)
+- adding tests so I can learn Jest (also its just good practice)
 # Known bugs: 
 - When an item is deleted, completed attribute gets flipped on all items after it in the task list and the mark task as done no long works as expected 
