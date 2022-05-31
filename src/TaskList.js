@@ -33,13 +33,13 @@ function TaskRow(props){
   return (
     <React.Fragment>
       <Grid item xs={2} alignSelf='right'>
-        <Checkbox label='is-done' />
+        <Checkbox />
       </Grid>
       <Grid item xs={9}>
         <Item id={props.data.id}>{props.data.name}</Item>
       </Grid>
       <Grid item xs={1}>
-        <IconButton aria-label="delete" size="small">
+        <IconButton aria-label="delete" size="small" onClick={() => props.onClick(props.data.id)}>
           <DeleteIcon fontSize="small" />
         </IconButton>
       </Grid>
@@ -62,6 +62,13 @@ function TaskList (){
     setValue('')
   });
 
+  const deleteTask = ((taskId) => {
+    const  copy = tasklist.slice();
+    const  newindex = copy.length;
+    copy.splice(taskId, 1)
+    setTaskList(copy)
+  });
+
   const onChange=((e) => {
     setValue(e.target.value);
   });
@@ -78,8 +85,9 @@ function TaskList (){
             item 
             spacing={3}
             alignItems='center'
+            id={task.id}
           >
-            <TaskRow data={task} />
+            <TaskRow data={task} onClick={deleteTask} />
           </Grid>
           ))
         }
