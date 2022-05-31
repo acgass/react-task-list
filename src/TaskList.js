@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, forceUpdate } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
@@ -33,9 +33,15 @@ function TaskRow(props){
   return (
     <React.Fragment>
       <Grid item xs={2} alignSelf='right'>
-        <Checkbox />
+        <Checkbox onInput={() => props.updateDisableTask(props.data.id)} />
       </Grid>
-      <Grid item xs={9}>
+      <Grid 
+        item 
+        xs={9}
+        sx={{
+          textDecorationLine: props.data.complete,
+        }}
+      >
         <Item id={props.data.id}>{props.data.name}</Item>
       </Grid>
       <Grid item xs={1}>
@@ -51,20 +57,32 @@ function TaskList (){
   const [tasklist, setTaskList] = useState([]);
   const [value, setValue] = useState("");
 
+  const updateDisableTask = ((taskId) =>{
+    const copy =  tasklist.slice();
+    if (copy[taskId].complete === 'none'){
+      copy[taskId].complete = 'line-through'
+    } else{
+      copy[taskId].complete = 'none'
+    }
+    setTaskList(copy)
+  });
+
   const addChild = ((taskName) => {
     const  copy = tasklist.slice();
     const  newindex = copy.length;
     if( newindex == 0){
       copy[newindex] = {
         name: taskName,
-        id: 0
+        id: 0,
+        complete: 'none'
       }
     } else{ 
       const lastId = copy[newindex-1].id
       const newId = lastId+1
       copy[newindex] = {
         name: taskName,
-        id: newId
+        id: newId,
+        complete: 'none'
       }
     }
     setTaskList(copy)
@@ -98,9 +116,8 @@ function TaskList (){
             item 
             spacing={3}
             alignItems='center'
-            id={task.id}
           >
-            <TaskRow data={task} onClick={deleteTask} />
+            <TaskRow data={task} onClick={deleteTask} updateDisableTask={updateDisableTask} />
           </Grid>
           ))
         }
