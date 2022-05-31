@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import TaskList from './TaskList'
-import GridTest from './GridTest';
 import './index.css';
 import Grid from '@mui/material/Grid';
 
