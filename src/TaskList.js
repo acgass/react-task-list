@@ -54,19 +54,32 @@ function TaskList (){
   const addChild = ((taskName) => {
     const  copy = tasklist.slice();
     const  newindex = copy.length;
-    copy[newindex] = {
-      name: taskName,
-      id: newindex
+    if( newindex == 0){
+      copy[newindex] = {
+        name: taskName,
+        id: 0
+      }
+    } else{ 
+      const lastId = copy[newindex-1].id
+      const newId = lastId+1
+      copy[newindex] = {
+        name: taskName,
+        id: newId
+      }
     }
     setTaskList(copy)
     setValue('')
   });
 
   const deleteTask = ((taskId) => {
-    const  copy = tasklist.slice();
-    const  newindex = copy.length;
-    copy.splice(taskId, 1)
-    setTaskList(copy)
+    console.log(tasklist)
+    const  newTaskList = tasklist.slice();
+    newTaskList.splice(taskId, 1)
+    for(let i = taskId; i < newTaskList.length; i++){
+        let currentId = newTaskList[i].id
+        newTaskList[i].id = currentId - 1 
+    }
+    setTaskList(newTaskList)
   });
 
   const onChange=((e) => {
