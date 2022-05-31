@@ -1,6 +1,6 @@
 # Task List
 
-This project is really just a way for react. 
+This project is really just a way for me to learn react. I decided to make a task list because I could easily come up with features that were straightforward and not overwhelming
 
 # Current Functionality
 
